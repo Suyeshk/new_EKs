@@ -40,7 +40,7 @@ jobs:
     - name: Install Helm Chart
       env:
         RELEASE_NAME: my-release
-        APP_NAME1: my-repo/wordpress
+        APP_NAME1: my-repo2/wordpress
 
       run: 
         helm install $RELEASE_NAME $APP_NAME1
