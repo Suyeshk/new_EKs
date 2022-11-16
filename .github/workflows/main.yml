@@ -26,21 +26,21 @@ jobs:
 
     - name: Update Kubeconfig File
       env:
-        REGION_NAME :"us-east-2"
-        CLUSTER_NAME:"eksdemo1"  
+        REGION_NAME : "us-east-2"
+        CLUSTER_NAME: "eksdemo1"  
       run:
        aws eks update-kubeconfig --region $REGION_NAME-- --name $CLUSTER_NAME
     - name: Install Helm
       run: curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
     - name: Create Helm Chart
       env:
-        APP_NAME:https://charts.bitnami.com/bitnami
+        APP_NAME: https://charts.bitnami.com/bitnami
       run:
         helm create $APP_NAME
     - name: Install Helm Chart
       env:
-        RELEASE_NAME:my-repo
-        APP_NAME:my-repo/wordpress
+        RELEASE_NAME: my-release
+        APP_NAME: my-repo/wordpress
 
       run: 
         helm install $RELEASE_NAME $APP_NAME
