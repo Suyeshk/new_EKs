@@ -9,6 +9,9 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
+    env:
+      REGION_NAME : "us-east-2"
+      CLUSTER_NAME: "eksdemo1" 
 
     steps:
     - name: Checkout
@@ -25,9 +28,6 @@ jobs:
       run: curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.23.7/2022-06-29/bin/linux/amd64/kubectl
 
     - name: Update Kubeconfig File
-      env:
-        REGION_NAME : us-east-2
-        CLUSTER_NAME: eksdemo1  
       run:
        aws eks update-kubeconfig --region $REGION_NAME --name $CLUSTER_NAME
     - name: Install Helm
