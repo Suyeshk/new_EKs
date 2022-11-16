@@ -10,7 +10,7 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     env:
-      REGION_NAME : "us-east-2"
+      REGION_NAME : "us-east-1"
       CLUSTER_NAME: "eksdemo1" 
 
     steps:
@@ -22,7 +22,7 @@ jobs:
       with:
         aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
         aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-        aws-region: us-east-2
+        aws-region: us-east-1
 
     - name: Install and configure kubectl
       run: curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.23.7/2022-06-29/bin/linux/amd64/kubectl
