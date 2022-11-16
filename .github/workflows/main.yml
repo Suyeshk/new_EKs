@@ -29,7 +29,7 @@ jobs:
 
     - name: Update Kubeconfig File
       run:
-       aws eks update-kubeconfig --region$REGION_NAME --name$CLUSTER_NAME
+       aws eks update-kubeconfig --region $REGION_NAME --name $CLUSTER_NAME
     - name: Install Helm
       run: curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
     - name: Create Helm Chart
