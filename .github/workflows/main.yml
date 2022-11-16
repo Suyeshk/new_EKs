@@ -1,0 +1,47 @@
+name: EKS helm chart
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
+        aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+        aws-region: region-name
+
+    - name: Install and configure kubectl
+      run: curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.23.7/2022-06-29/bin/linux/amd64/kubectl
+
+    - name: Update Kubeconfig File
+      env:
+        REGION_NAME :"us-east-2"
+        CLUSTER_NAME:"eksdemo1"  
+      run:
+       aws eks update-kubeconfig --region $REGION_NAME-- --name $CLUSTER_NAME
+    - name: Install Helm
+      run: curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+    - name: Create Helm Chart
+      env:
+        APP_NAME:https://charts.bitnami.com/bitnami
+      run:
+        helm create $APP_NAME
+    - name: Install Helm Chart
+      env:
+        RELEASE_NAME:my-repo
+        APP_NAME:my-repo/wordpress
+
+      run: 
+        helm install $RELEASE_NAME $APP_NAME
+        
