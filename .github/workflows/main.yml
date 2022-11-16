@@ -26,8 +26,8 @@ jobs:
 
     - name: Update Kubeconfig File
       env:
-        REGION_NAME : "us-east-2"
-        CLUSTER_NAME: "eksdemo1"  
+        REGION_NAME : us-east-2
+        CLUSTER_NAME: eksdemo1  
       run:
        aws eks update-kubeconfig --region $REGION_NAME --name $CLUSTER_NAME
     - name: Install Helm
