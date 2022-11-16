@@ -36,7 +36,7 @@ jobs:
       env:
         APP_NAME: https://charts.bitnami.com/bitnami
       run:
-        helm create $APP_NAME
+        helm repo add my-repo $APP_NAME
     - name: Install Helm Chart
       env:
         RELEASE_NAME: my-release
